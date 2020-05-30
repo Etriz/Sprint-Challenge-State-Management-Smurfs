@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { SmurfContext } from "../contexts/SmurfContext";
+
+const defaultForm = { name: "", age: "", height: "" };
 
 const AddSmurfForm = () => {
-  const [formData, setFormData] = useState({ name: "", age: "", height: "" });
+  const [formData, setFormData] = useState(defaultForm);
+  const { setSmurfData } = useContext(SmurfContext);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -10,12 +16,21 @@ const AddSmurfForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.blur();
+    axios
+      .post("http://localhost:3333/smurfs", formData)
+      .then((res) => {
+        // console.table(res.data);
+        setSmurfData(res.data);
+      })
+      .catch((err) => console.log(err));
+    setFormData(defaultForm);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add New Smurf</h2>
-      <label htmlFor="">
+      <label htmlFor="name">
         Name
         <input
           type="text"
@@ -26,7 +41,7 @@ const AddSmurfForm = () => {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="">
+      <label htmlFor="age">
         Age
         <input
           type="text"
@@ -37,7 +52,7 @@ const AddSmurfForm = () => {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="">
+      <label htmlFor="height">
         Height
         <input
           type="text"
