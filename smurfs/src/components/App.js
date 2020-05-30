@@ -10,8 +10,14 @@ const App = () => {
 
   const deleteSmurf = (id) => {
     axios
-      .put(`http://localhost:3333/smurfs/:${id}`)
-      .then((res) => console.log(res.data).catch((err) => console.log(err)));
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        const newData = res.data;
+        localStorage.setItem("smurfs", JSON.stringify(newData));
+        setSmurfData(newData);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

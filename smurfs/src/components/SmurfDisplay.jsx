@@ -11,7 +11,7 @@ const SmurfDisplay = () => {
           <p>Name: {smurf.name}</p>
           <p>Age: {smurf.age}</p>
           <p>Height: {smurf.height}</p>
-          <button onClick={() => deleteSmurf(smurf.id)}>Change</button>
+          <button onClick={() => deleteSmurf(smurf.id)}>Remove</button>
         </div>
       ))}
     </div>

@@ -21,7 +21,9 @@ const AddSmurfForm = () => {
       .post("http://localhost:3333/smurfs", formData)
       .then((res) => {
         // console.table(res.data);
-        setSmurfData(res.data);
+        const newData = res.data;
+        localStorage.setItem("smurfs", JSON.stringify(newData));
+        setSmurfData(newData);
       })
       .catch((err) => console.log(err));
     setFormData(defaultForm);

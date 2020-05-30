@@ -1,7 +1,29 @@
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 500px;
+  justify-content: center;
+  align-items: center;
+  label {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 250px;
+  }
+  button {
+    margin: 1rem auto;
+    margin-bottom: 0;
+    width: 6rem;
+  }
 }
 .smurfCard {
   border: 1px solid black;
