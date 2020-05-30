@@ -6,7 +6,7 @@ const defaultForm = { name: "", age: "", height: "" };
 
 const AddSmurfForm = () => {
   const [formData, setFormData] = useState(defaultForm);
-  const { setSmurfData } = useContext(SmurfContext);
+  const { setSmurfData, setErrorState } = useContext(SmurfContext);
 
   const handleChange = (e) => {
     setFormData({
@@ -25,7 +25,10 @@ const AddSmurfForm = () => {
         localStorage.setItem("smurfs", JSON.stringify(newData));
         setSmurfData(newData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.response.data);
+        // setErrorState(err.response.data);
+      });
     setFormData(defaultForm);
   };
 

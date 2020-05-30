@@ -7,6 +7,7 @@ import AddSmurfForm from "./AddSmurfForm";
 import SmurfDisplay from "./SmurfDisplay";
 const App = () => {
   const [smurfData, setSmurfData] = useState([]);
+  const [errorState, setErrorState] = useState("");
 
   const deleteSmurf = (id) => {
     axios
@@ -14,7 +15,9 @@ const App = () => {
       .then((res) => {
         console.log(res.data);
         const newData = res.data;
-        localStorage.setItem("smurfs", JSON.stringify(newData));
+        newData.length > 0
+          ? localStorage.setItem("smurfs", JSON.stringify(newData))
+          : localStorage.removeItem("smurfs");
         setSmurfData(newData);
       })
       .catch((err) => console.log(err));
@@ -24,15 +27,16 @@ const App = () => {
     axios
       .get("http://localhost:3333/smurfs")
       .then((res) => {
-        console.log(res.data);
-        const data = localStorage.getItem("smurfs");
-        setSmurfData(data || res.data);
+        console.log("API data", res.data);
+        const data = JSON.parse(localStorage.getItem("smurfs"));
+        setSmurfData(data ? data : res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <SmurfContext.Provider value={{ smurfData, setSmurfData, deleteSmurf }}>
+    <SmurfContext.Provider
+      value={{ smurfData, setSmurfData, deleteSmurf, errorState, setErrorState }}>
       <div className="App">
         <h1>SMURFS! 2.0 W/ Context</h1>
         {/* <div>Welcome to your state management version of Smurfs!</div>
