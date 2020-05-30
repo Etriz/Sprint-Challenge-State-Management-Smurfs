@@ -16,7 +16,10 @@ const SmurfDisplay = () => {
           </div>
         ))
       ) : (
-        <p>No Data Found</p>
+        <>
+          {/* <p>No Data Found</p> */}
+          <p>{errorState}</p>
+        </>
       )}
     </div>
   );

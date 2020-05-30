@@ -26,8 +26,8 @@ const AddSmurfForm = () => {
         setSmurfData(newData);
       })
       .catch((err) => {
-        console.log(err.response.data);
-        // setErrorState(err.response.data);
+        // console.log("submit error", err.response.data.Error);
+        setErrorState(err.response.data.Error);
       });
     setFormData(defaultForm);
   };
