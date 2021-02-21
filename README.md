@@ -23,10 +23,31 @@ In this challenge, you are to build a Smurfs village utilizing context or Redux 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] What problem does the context API help solve?
+
+-context api helps solve the problem of having to pass props down multiple times through components that dont need
+access to them but still need it to pass to children
+
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+-the store controlls and stores the entire state and is the 'single source of truth' because it passes it down to components as they need it.
+-actions tell exactly what changed so the least re-render possible happens.
+-reducers take in the previous state and an action and returns back what the state has changed to become
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+-application state is the global state that any component can access and should be used when the state needs
+to be used by multiple components and child components
+-component state is unique to just that component and should be used for things like input values and other things
+only that components needs access to
+
 - [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+-thunk is a middleware that intercepts the action before the reducer and does some change to it
+-it changes actions by allowing them to return a function that does something instead of just a dispatch object
+
 - [ ] What is your favorite state management system you've learned and this sprint? Please explain why!
+
+-i like using context as it seems less prone to errors and easier to implement and use
 
 ## Project Set Up
 
@@ -64,8 +85,8 @@ Follow these steps to set up your project:
     name: "Brainey",
     age: 200,
     height: "5cm",
-    id: 0
-  }
+    id: 0,
+  },
 ];
 ```
 
@@ -97,14 +118,14 @@ Example of object created in Smurf DB:
     name: "Brainey",
     age: 200,
     height: "5cm",
-    id: 0
+    id: 0,
   },
   {
     name: "Sleepy",
     age: 200,
     height: "5cm",
-    id: 1
-  }
+    id: 1,
+  },
 ];
 ```
 
@@ -157,7 +178,7 @@ output: [
     name: "Sleepy",
     age: 200,
     height: "5cm",
-    id: 1
-  }
+    id: 1,
+  },
 ];
 ```
